@@ -1,0 +1,16 @@
+---
+- name: add hpsum repo
+  ansible.builtin.yum_repository:
+    name: hpsum
+    description: HPE Smart Update Manager
+    baseurl: "{{ repo_url }}"
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: "{{ repo_gpg_key }}"
+  tags: repo
+
+- name: install packages
+  ansible.builtin.package:
+    name: sum
+    state: present
+  tags: packages
